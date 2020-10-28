@@ -115,6 +115,14 @@ video::-webkit-media-controls-fullscreen-button {
     display: none;
 }
 
+/* button {
+    object-fit: fill;
+}
+
+form {
+    object-fit: fill;
+} */
+
 /* Handle Screen size responsiveness */
 
 @media only screen and (max-width: 1000px) {

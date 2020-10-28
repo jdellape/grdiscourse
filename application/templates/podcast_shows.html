@@ -4,7 +4,8 @@
 <section class="cards">
 
     {% for podcast in podcasts %}
-    <div class="card">
+    <!-- onclick to link to the main page of the podcast -->
+    <div class="card" onclick="window.open('{{podcast.web_page}}');">
         <div class="card__image-container">
             <img src={{podcast.artwork}} />
         </div>
@@ -12,15 +13,20 @@
             <p class="card__title text--medium">
                 {{podcast.name}}
             </p>
-            <a href={{podcast.web_page}} target="_blank">{{podcast.name}}</a>
+            <p class="text--medium">{{podcast.description}}</p>
             <!-- <p>{{podcast.name}}</p> -->
             <div class="card__info">
-                <p class="text--medium">{{podcast.description}}</p>
+                <!-- <form action={{podcast.web_page}} method="get" target="_blank">
+                    <button type="submit" >GO TO PODCAST</button>
+                 </form> -->
             </div>
         </div>
     </div>
+
     {%endfor%}
     
 </section>
 </main>
+
 {% endblock %}
+
