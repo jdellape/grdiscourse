@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<main>
+<section class="cards">
+
+    {% for podcast in podcasts %}
+    <div class="card">
+        <div class="card__image-container">
+            <img src={{podcast.artwork}} />
+        </div>
+        <div class="card__content">
+            <p class="card__title text--medium">
+                {{podcast.name}}
+            </p>
+            <a href={{podcast.web_page}} target="_blank">{{podcast.name}}</a>
+            <!-- <p>{{podcast.name}}</p> -->
+            <div class="card__info">
+                <p class="text--medium">{{podcast.description}}</p>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    
+</section>
+</main>
+{% endblock %}
