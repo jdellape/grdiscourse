@@ -18,6 +18,21 @@ header{
     position: fixed;
 }
 
+h2 {
+    color: #fff;
+    padding-left: 175px;
+}
+
+.first_h2 {
+    color: #fff;
+    padding-top: 105px;
+}
+
+.noncard__ptag{
+    color: #fff;
+    padding-left: 175px;
+}
+
 nav{
     float: right;
     line-height: 100px;
@@ -42,7 +57,7 @@ main {
     grid-gap: 40px;
     padding: 60px 0;
     position: relative;
-    padding-top: 100px;
+    /* padding-top: 100px; */
 }
 
 .text--medium {
@@ -144,6 +159,14 @@ form {
         float: none;
         /* position: relative; */
         line-height: 15px;
+    }
+
+    h2 {
+        padding-left: 15px;
+    }
+
+    .noncard__ptag{
+        padding-left: 15px;
     }
 
     nav a{

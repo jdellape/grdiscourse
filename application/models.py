@@ -4,14 +4,14 @@ import requests
 
 #For Podcasts
 
-PODCAST_IDS = ['1495107302','591157388','1289898626','1212429230','1072608281']
+PODCAST_IDS = ['1495107302','591157388','1289898626','1212429230','1072608281','1094878688']
 
 FETCH_ALL_PODCASTS_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcast'.format(','.join(PODCAST_IDS))
 
 FINAL_ARTWORK_DIMENSIONS = '300x300'
 
 #Podcast Episodes
-FETCH_RECENT_PODCAST_EPISODES_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcastEpisode&limit=25'.format(','.join(PODCAST_IDS))
+FETCH_RECENT_PODCAST_EPISODES_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcastEpisode&limit=1'.format(','.join(PODCAST_IDS))
 
 #Not finding podcast description via api so building a dict {id:description} to store
 PODCAST_DESCRIPTIONS = {
@@ -31,7 +31,9 @@ PODCAST_DESCRIPTIONS = {
                   through our Christian faith. So pull up a chair and have a seat at the table with us. Learn more at TruthsTable.com",
   "1072608281" : "Q educates and equips Christians to engage our cultural moment. Our method of learning is simple: \
                  exposure, conversation and collaboration. Listen to the Q Podcast to learn, explore and consider how you can be \
-                faithful in our cultural context."
+                faithful in our cultural context.",
+  '1094878688' : "Each week the editors of Christianity Today go beyond hashtags and hot-takes and set aside time to explore the \
+                 reality behind a major cultural event."
 }
 
 class Podcast:
