@@ -1,10 +1,10 @@
 #This is where I will maintain the business object definition and retrieval
-
+from application import db
 import requests
 
 #For Podcasts
 
-PODCAST_IDS = ['1495107302','591157388','1289898626','1212429230','1072608281','1094878688']
+PODCAST_IDS = ['1495107302','591157388','1289898626','1212429230','1072608281','1094878688','998360427','1069930513','582049752']
 
 FETCH_ALL_PODCASTS_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcast'.format(','.join(PODCAST_IDS))
 
@@ -33,7 +33,16 @@ PODCAST_DESCRIPTIONS = {
                  exposure, conversation and collaboration. Listen to the Q Podcast to learn, explore and consider how you can be \
                 faithful in our cultural context.",
   '1094878688' : "Each week the editors of Christianity Today go beyond hashtags and hot-takes and set aside time to explore the \
-                 reality behind a major cultural event."
+                 reality behind a major cultural event.",
+  '998360427'  : "A program for Christ-followers who want to participate more effectively in God’s work both at home and to the \
+                 ends of the earth.",
+  '1069930513' : "Churches Planting Churches is a podcast produced by Acts 29 in partnership with The Gospel Coalition. \
+                 Tony Merida talks with various church planters, pastors, theologians, and innovators; sharing stories and \
+                 insights to help you serve Christ’s church more faithfully and effectively.",
+  '582049752'  : "Seminary Dropout- It’s not full on academia like in seminary, but that’s not to say that theology nerds \
+                 won’t like it as well, because it’s not Youth Camp either. There’s no Greek or Hebrew translation home work, \
+                 but there are also no trust falls. There will be fun, insightful, personal, thoughtful and engaging interviews \
+                 with Christian leaders, thinkers, bloggers, authors and theologians."
 }
 
 class Podcast:
@@ -105,6 +114,17 @@ def get_all_podcast_episodes():
             pass
 
     return podcast_episodes
+
+def get_featured_resource():
+    #Get mongo cursor object for featured_resources collection and grab current resource to feature
+    featured_resource_cursor = db.featured_resources.find().sort("date_featured", 1).limit(1)
+    featured_resource =  ""
+    for resource in featured_resource_cursor:
+        featured_resource = resource
+    # if featured_resource['resource_type'] == 'Podcast':
+    #     #Change this to a PodcastEpisode
+    #     # featured_resource = PodcastEpisode()
+    return featured_resource
 
 
 

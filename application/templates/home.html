@@ -10,32 +10,45 @@
 <body>
     {% include "includes/nav.html" %}
     <h2 class="first_h2">Featured&nbsp;Podcast&nbsp;Episode</h2>
-    <p class="noncard__ptag">Should we have information on why we are recommending this podcast above the episode card?</p>
-    <p class="noncard__ptag">Here is a quote</p>
-    <p class="noncard__ptag">Here is another quote</p>
-    <p class="noncard__ptag">More and more information</p>
-    <main>
-        <section class="cards">
-            <div class="card">
-                <div class="card__image-container">
-                    <img src="https:///is5-ssl.mzstatic.com/image/thumb/Podcasts113/v4/06/9b/76/069b76d0-e77f-2e66-8a1e-2d750c8c781c/mza_1262336115322394026.jpg/300x300bb.jpg">
-                </div>
-                <div class="card__content">
-                    <p class="card__title text--medium">
-                        Episode 428: How Should Christians Vote? <br>Released: 2020-10-28<br>
-                    </p>
-                    <!-- <a href=https://podcasts.apple.com/us/podcast/episode-428-how-should-christians-vote/id591157388?i=1000496386028&amp;uo=4 target="_blank">Episode 428: How Should Christians Vote?</a> -->
-                    <div class="card__info">
-                        <!-- <p class="text--medium">With less than a week until the election, Phil and Skye are joined by Kaitlyn Schiess to discuss what should, and should not, influence how Christians vote. First, they talk about reactions to Skye’s video (not Phil’s, he had nothing to do with...</p> -->
-                        <video controls="" preload="none" controlslist="nodownload">
-                            <source src="https://traffic.libsyn.com/secure/thephilvischerpodcast/HP428_2.mp3?dest-id=121777" type="audio/mpeg">
-                        </video>
+
+    <!-- <main> -->
+        <section class="featured">
+            <div class="featured--card">
+                <div class="card">
+                    <div class="card__image-container">
+                        <img src={{featured_resource['resource_image_url']}}>
+                    </div>
+                    <div class="card__content">
+                        <p class="card__title text--medium">
+                            {{featured_resource['resource_title']}} <br>{{featured_resource['publish_date']}}<br>
+                        </p>
+                        <div class="card__info">
+                            <!-- <p class="text--medium">With less than a week until the election, Phil and Skye are joined by Kaitlyn Schiess to discuss what should, and should not, influence how Christians vote. First, they talk about reactions to Skye’s video (not Phil’s, he had nothing to do with...</p> -->
+                            <video controls="" preload="none" controlslist="nodownload">
+                                <source src={{featured_resource['podcast_episode_player_url']}} type="audio/mpeg">
+                            </video>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="featured--text">
+                <p>With less than a week until the election, Phil and Skye are joined by Kaitlyn Schiess to discuss what should, and should not, 
+                    influence how Christians vote. First, they talk about reactions to Skye’s video (not Phil’s, he had nothing to do with it!) 
+                    about abortion, and the different ways the issue is viewed by evangelicals. They also unpack recent articles about the 
+                    election from three Christian leaders—John Piper, Al Mohler, and Joel Hunter. It is just a coincidence that the two 
+                    retired pastors oppose Trump? And why does Mohler hold Black Christians to a different standard when voting? 
+                    Phil explains why two traditionally Republican counties should make conservatives rethink their support for Trump.
+                     And why is every election framed as an existential threat to America? Finally, Skye talks with Scott Arbeiter, 
+                     president of World Relief, about the historically low number of refugees resettled in the U.S., the current administration’s
+                      broken promise to help persecuted Christians, and why evangelical leaders and laity are so far apart on the issue
+                       of immigration. Lifeway Research | “2016 Election Exposes Evangelical Divides</p>
+                <!-- <p class="noncard__ptag">Here is a quote</p>
+                <p class="noncard__ptag">Here is another quote</p>
+                <p class="noncard__ptag">More and more information</p> -->
+            </div>
         </section>
-    </main>
-    <h2>Recent&nbsp;Podcast&nbsp;Episodes</h2>
+    <!-- </main> -->
+    <h2>Most&nbsp;Recent&nbsp;Episodes</h2>
     <main>
         <section class="cards">
             

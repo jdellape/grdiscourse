@@ -1,5 +1,5 @@
 from application import app
-from .models import get_all_podcasts, get_all_podcast_episodes
+from .models import get_all_podcasts, get_all_podcast_episodes, get_featured_resource
 from flask import json, render_template
 import requests
 from datetime import datetime
@@ -10,6 +10,10 @@ def home():
     #Get podcasts episodes sorted from most recent to oldest and present it to the user
     podcast_episodes = get_all_podcast_episodes()
 
+    #Get the featured resource
+    featured_resource = get_featured_resource()
+    featured_resource['publish_date'] =  str(featured_resource['publish_date'])[:10]
+
     #Loop to set a datetime object within each episode object
     for ep in podcast_episodes:
         ep.release_date = ep.release_date[:10]
@@ -17,7 +21,7 @@ def home():
         ep.set_podcast_episode_datetime_release(time_in_datetime)
     #Sort my list according to the datetime value I input (most recent eps should display first)
     podcast_episodes.sort(reverse=True, key=lambda x: x.release_date_datetime)
-    return render_template("home.html", podcast_episodes=podcast_episodes, title="Home")
+    return render_template("home.html", podcast_episodes=podcast_episodes, featured_resource=featured_resource, title="Home")
 
 @app.route("/podcasts")
 def podcasts():

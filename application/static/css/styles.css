@@ -21,31 +21,50 @@ header{
 h2 {
     color: #fff;
     padding-left: 175px;
+    font-size: 22px;
+    text-align:center;
 }
 
 .first_h2 {
     color: #fff;
     padding-top: 105px;
+    font-size: 22px;
 }
 
-.noncard__ptag{
+.about--us--p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #ecf0f1;
+    margin-top: 1em ;
+    margin-bottom: 1em ;
+}
+
+/* .noncard__ptag{
     color: #fff;
     padding-left: 175px;
-}
+} */
 
 nav{
-    float: right;
+    /* float: right; */
+    text-align:center;
     line-height: 100px;
 }
 
 nav a{
+    /* text-align:center; */
     text-decoration: none;
     font-family: bignoodletitling;
     letter-spacing: 4px;
-    font-size: 20px;
+    font-size: 24px;
     margin: 0 10px;
     color: #fff;
 }
+
+/* a:hover {
+    transform: translateY(-7px);
+} */
 
 body{
     background-color: #303032;
@@ -58,6 +77,34 @@ main {
     padding: 60px 0;
     position: relative;
     /* padding-top: 100px; */
+}
+
+.about--us--section {
+    padding-top: 105px; 
+}
+
+.featured {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap:0px;
+    padding-left: 175px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+} 
+
+.featured--card {
+    width: 75%;
+    /* float: left;
+    padding: 20px; */
+}
+
+.featured--text {
+    /* width:50%; */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #ecf0f1;
 }
 
 .text--medium {
@@ -130,13 +177,6 @@ video::-webkit-media-controls-fullscreen-button {
     display: none;
 }
 
-/* button {
-    object-fit: fill;
-}
-
-form {
-    object-fit: fill;
-} */
 
 /* Handle Screen size responsiveness */
 
@@ -147,6 +187,23 @@ form {
 }
 
 @media only screen and (max-width: 700px) {
+    .featured {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: none;
+        grid-auto-flow: row;
+        /* grid-template-columns: none; */
+        /* grid-gap: 0px; */
+        padding-left: 15px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    /* .featured--card {
+        width: 100%;
+        float: left;
+        padding: 20px; 
+    } */
+
     header{
         height: 100px;
         background: #303032;
@@ -170,12 +227,13 @@ form {
     }
 
     nav a{
-        float: none;
-        display: block;
+        /* float: right; */
+        display: inline-block;
         text-align: left;
-        font-size: 15px;
+        font-size: 20px;
         padding-left: 15px;
         padding-top: 5px;
+        padding-bottom: 10px;
         margin:0;
         position:relative;
         /* text-decoration: none;
