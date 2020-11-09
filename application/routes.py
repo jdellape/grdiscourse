@@ -1,6 +1,6 @@
 from application import app
-from .models import get_all_podcasts, get_all_podcast_episodes, get_featured_resource
-from flask import json, render_template
+from .models import get_all_podcasts, get_all_podcast_episodes, get_featured_resource, get_all_featured_resources
+from flask import json, render_template, request
 import requests
 from datetime import datetime
 
@@ -50,6 +50,17 @@ def about_us():
     return render_template("about_us.html", title="About Us")
 
 
-@app.route("/archives")
+@app.route("/archives", methods=['GET','POST'])
 def archives():
-    return render_template("archives.html", title="Archives")
+    topic_keyword = request.form.get('topic_keyword')
+    
+    #If a search term exists, filter by it, else return all featured resources
+    if topic_keyword is not None:
+        featured_resources = get_all_featured_resources(topic_keyword=topic_keyword)
+    else:
+        featured_resources = get_all_featured_resources()
+    
+    for featured_resource in featured_resources:
+        featured_resource['publish_date'] =  str(featured_resource['publish_date'])[:10]
+
+    return render_template("archives.html", featured_resources=featured_resources, title="Archives")

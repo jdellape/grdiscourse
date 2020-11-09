@@ -126,5 +126,23 @@ def get_featured_resource():
     #     # featured_resource = PodcastEpisode()
     return featured_resource
 
+def get_all_featured_resources(topic_keyword=None):
+    #Get mongo cursor object for featured_resources collection and grab current resource to feature
+    featured_resource_cursor = db.featured_resources.find().sort("date_featured", 1)
+    featured_resource =  ""
+    all_featured_resources =  []
+    #Adding functionality for filtering by topic. Refactor this to be more efficient.
+    if topic_keyword is not None:
+        for resource in featured_resource_cursor:
+            featured_resource = resource
+            if topic_keyword in featured_resource['topics']:
+                all_featured_resources.append(featured_resource)
+    else:
+        for resource in featured_resource_cursor:
+            featured_resource = resource
+            all_featured_resources.append(featured_resource)
+    return all_featured_resources
+
+
 
 

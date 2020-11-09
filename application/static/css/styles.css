@@ -81,6 +81,8 @@ main {
 
 .about--us--section {
     padding-top: 105px; 
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .featured {
@@ -90,6 +92,7 @@ main {
     padding-left: 175px;
     padding-top: 60px;
     padding-bottom: 60px;
+    padding-right: 15px;
 } 
 
 .featured--card {

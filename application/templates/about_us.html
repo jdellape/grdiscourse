@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/static/css/styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-</head>
-<body>
-    {% include "includes/nav.html" %}
+{% extends "layout.html" %}
+{% block content %}
     <section class="about--us--section">
         <p class="about--us--p">The mission of Great Requirement Discourse is to amplify Christian voices moored to an orthodox Christian faith who 
             speak to the issue of correct Christian practice in society (orthopraxy) while seeking to fulfill what has been called 
@@ -30,8 +21,7 @@
              perspectives and believe giving them a wider audience will benefit God’s church.</p>
     <!-- </main> -->
     </section>
-</body>
-</html>
+{% endblock %}
 
 
 

@@ -1,16 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/static/css/styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-</head>
-<body>
-    {% include "includes/nav.html" %}
-    <section style="padding-top:105px">
-        <p class="about--us--p" >Here is where we will display the archive of featured podcasts</p>
+{% extends "layout.html" %}
+{% block content %}
+<section style="padding-top:105px">
+
+    <h2>Search By Topic</h2>
+    <div style="text-align:center;">
+        <form name="archive_search_form" id="archive_search_form" action="{{url_for('archives')}}" method="POST">
+            <input type="text" name="topic_keyword"/>
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
+    {% for featured_resource in featured_resources %}
+    <section class="featured">
+        <div class="featured--card">
+            <div class="card">
+                <div class="card__image-container">
+                    <img src={{featured_resource['resource_image_url']}}>
+                </div>
+                <div class="card__content">
+                    <p class="card__title text--medium">
+                        {{featured_resource['resource_title']}} <br>Released: {{featured_resource['publish_date']}}<br>
+                    </p>
+                    <div class="card__info">
+                        <video controls="" preload="none" controlslist="nodownload">
+                            <source src={{featured_resource['podcast_episode_player_url']}} type="audio/mpeg">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="featured--text">
+            <p>{{featured_resource['description']}}
+                <br/>
+                <br>Topics: {{featured_resource['topics']}}<br>
+            </p>
+        </div>
     </section>
-</body>
-</html>
+
+    {%endfor%}
+    
+</section>
+
+{% endblock %}
+
