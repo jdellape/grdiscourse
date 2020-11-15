@@ -3,10 +3,21 @@
 <section style="padding-top:105px">
 
     <h2>Search By Topic</h2>
-    <div style="text-align:center;">
+    <div class="form-container">
         <form name="archive_search_form" id="archive_search_form" action="{{url_for('archives')}}" method="POST">
-            <input type="text" name="topic_keyword"/>
-            <input type="submit" value="Submit"/>
+                <select name="topic_keyword" id="topic_list" onchange="this.form.submit()">
+                    {% for topic in distinct_topic_list %}
+                    <option value = {{topic}}>{{topic}}</option>
+                    {%endfor%}
+                </select>
+                <!-- <input type="submit" id="userInput" name="topic_keyword"/> -->
+                <!-- <input type="text" id="userInput" name="topic_keyword" onkeyup="filterTopics()"/> -->
+                <!-- <ul id="topic_list">
+                    {% for topic in distinct_topic_list %}
+                    <li><a href='#'>{{topic}}</a></li>
+                    {%endfor%}
+                </ul> -->
+            <!-- <input type="submit" value="Submit"/> -->
         </form>
     </div>
     {% for featured_resource in featured_resources %}
@@ -39,6 +50,30 @@
     {%endfor%}
     
 </section>
+
+<!-- Reference: https://www.w3schools.com/howto/howto_js_filter_lists.asp -->
+
+<!-- <script>
+    function filterTopics() {
+      // Declare variables
+      var input, filter, ul, li, a, i, txtValue;
+      input = document.getElementById('userInput');
+      filter = input.value.toLowerCase();
+      ul = document.getElementById("topic_list");
+      li = ul.getElementsByTagName('li');
+    
+      // Loop through all topics, and hide those who don't match the search query
+      for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+    }
+</script> -->
 
 {% endblock %}
 

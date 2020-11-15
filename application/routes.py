@@ -1,5 +1,5 @@
 from application import app
-from .models import get_all_podcasts, get_all_podcast_episodes, get_featured_resource, get_all_featured_resources
+from .models import get_all_podcasts, get_all_podcast_episodes, get_featured_resource, get_all_featured_resources, get_all_topics
 from flask import json, render_template, request
 import requests
 from datetime import datetime
@@ -52,6 +52,8 @@ def about_us():
 
 @app.route("/archives", methods=['GET','POST'])
 def archives():
+    distinct_topic_list = get_all_topics()
+    
     topic_keyword = request.form.get('topic_keyword')
     
     #If a search term exists, filter by it, else return all featured resources
@@ -63,4 +65,4 @@ def archives():
     for featured_resource in featured_resources:
         featured_resource['publish_date'] =  str(featured_resource['publish_date'])[:10]
 
-    return render_template("archives.html", featured_resources=featured_resources, title="Archives")
+    return render_template("archives.html", featured_resources=featured_resources, distinct_topic_list=distinct_topic_list, title="Archives")

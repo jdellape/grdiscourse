@@ -143,6 +143,25 @@ def get_all_featured_resources(topic_keyword=None):
             all_featured_resources.append(featured_resource)
     return all_featured_resources
 
+def get_all_topics():
+    #Get a set of all the topics within mongo database
+    #Opportunity to refactor here. Try to get the distinct list using a MongoDB Query
+    all_topic_arrays = db.featured_resources.find({},{"topics":1, "_id": 0})
+    #Create an empty set
+    topic_set = set()
+
+    for topic_array in all_topic_arrays:
+        topics = topic_array['topics']
+        for topic in topics:
+            #Add to my set
+            topic_set.add(topic)
+    distinct_topic_list = list(topic_set)
+    distinct_topic_list.sort()
+
+    #Return all distinct topics 
+    return distinct_topic_list
+
+
 
 
 

@@ -20,7 +20,7 @@ header{
 
 h2 {
     color: #fff;
-    padding-left: 175px;
+    /* padding-left: 175px; */
     font-size: 22px;
     text-align:center;
 }
@@ -77,6 +77,23 @@ main {
     padding: 60px 0;
     position: relative;
     /* padding-top: 100px; */
+}
+
+/* Styling of the archives drop down form */
+
+/* Reference: https://www.w3schools.com/css/css_form.asp */
+
+select {
+    width: 50%;
+    height: 12px;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+.form-container {
+    text-align:center;
 }
 
 .about--us--section {
