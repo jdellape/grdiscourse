@@ -1,0 +1,65 @@
+{% extends "layout_bootstrap.html" %}
+{% block content %}
+
+<div class="container">
+    <h2 class="text-white text-center">Featured&nbsp;Podcast&nbsp;Episode</h2>
+</div>
+
+<!-- Show Featured Content -->
+<div class="container">
+    <div class="row row-cols-2 d-flex">
+        <div class="col d-flex">
+            <section class="card mb-5 bg-dark text-white">
+            <img class="card-img-top" src={{featured_resource['resource_image_url']}} >
+            <div class="card-body">
+                <h3 class="card-title">{{featured_resource['resource_title']}} </h2>
+                <h5 class="card-subtitle">Released: {{featured_resource['publish_date']}}</h5>
+            </div>
+            <audio class="img-fluid" controls preload="none" controlsList="nodownload">
+                <source src={{featured_resource['podcast_episode_player_url']}} type="audio/mpeg">
+            </audio>
+            </section><!-- card -->
+        </div><!-- column -->
+        <div class="col d-flex">
+            <p class="text-white">With less than a week until the election, Phil and Skye are joined by Kaitlyn Schiess to discuss what should, and should not, 
+                influence how Christians vote. First, they talk about reactions to Skye’s video (not Phil’s, he had nothing to do with it!) 
+                about abortion, and the different ways the issue is viewed by evangelicals. They also unpack recent articles about the 
+                election from three Christian leaders—John Piper, Al Mohler, and Joel Hunter. It is just a coincidence that the two 
+                retired pastors oppose Trump? And why does Mohler hold Black Christians to a different standard when voting? 
+                Phil explains why two traditionally Republican counties should make conservatives rethink their support for Trump.
+                 And why is every election framed as an existential threat to America? Finally, Skye talks with Scott Arbeiter, 
+                 president of World Relief, about the historically low number of refugees resettled in the U.S., the current administration’s
+                  broken promise to help persecuted Christians, and why evangelical leaders and laity are so far apart on the issue
+                   of immigration. Lifeway Research | “2016 Election Exposes Evangelical Divides
+            </p>
+        </div>
+    </div><!-- row div -->
+
+</div> <!-- content container -->
+
+<!-- List Recent Episodes -->
+<div class="container">
+    <h2 class="text-white text-center">Most&nbsp;Recent&nbsp;Episodes</h2>
+</div>
+
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 d-flex">
+        {% for episode in podcast_episodes %}
+        <div class="col d-flex">
+            <section class="card mb-5 bg-dark text-white">
+            <img class="card-img-top" src={{episode.artwork}} >
+            <div class="card-body">
+                <h3 class="card-title">{{episode.episode_name}} </h2>
+                <h5 class="card-subtitle">Released: {{episode.release_date}}</h5>
+            </div>
+            <audio class="img-fluid" controls preload="none" controlsList="nodownload">
+                <source src="{{episode.episode_player_url}}" type="audio/mpeg">
+            </audio>
+            </section><!-- card -->
+        </div><!-- column -->
+        {%endfor%} 
+    </div><!-- row div -->
+
+</div> <!-- content container -->
+{% endblock %}

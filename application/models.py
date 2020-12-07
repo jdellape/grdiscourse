@@ -1,6 +1,7 @@
 #This is where I will maintain the business object definition and retrieval
 from application import db
 import requests
+from datetime import datetime
 
 #For Podcasts
 
@@ -8,7 +9,7 @@ PODCAST_IDS = ['1495107302','591157388','1289898626','1212429230','1072608281','
 
 FETCH_ALL_PODCASTS_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcast'.format(','.join(PODCAST_IDS))
 
-FINAL_ARTWORK_DIMENSIONS = '300x300'
+FINAL_ARTWORK_DIMENSIONS = '313x313'
 
 #Podcast Episodes
 FETCH_RECENT_PODCAST_EPISODES_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcastEpisode&limit=1'.format(','.join(PODCAST_IDS))
@@ -112,6 +113,14 @@ def get_all_podcast_episodes():
             podcast_episodes.append(episode)
         except:
             pass
+    
+    #Loop to set a datetime object within each episode object
+    for ep in podcast_episodes:
+        ep.release_date = ep.release_date[:10]
+        time_in_datetime = datetime.strptime(ep.release_date, "%Y-%m-%d")
+        ep.set_podcast_episode_datetime_release(time_in_datetime)
+    #Sort my list according to the datetime value I input (most recent eps should display first)
+    podcast_episodes.sort(reverse=True, key=lambda x: x.release_date_datetime)
 
     return podcast_episodes
 
@@ -126,16 +135,16 @@ def get_featured_resource():
     #     # featured_resource = PodcastEpisode()
     return featured_resource
 
-def get_all_featured_resources(topic_keyword=None):
+def get_all_featured_resources(filter_topics=None):
     #Get mongo cursor object for featured_resources collection and grab current resource to feature
     featured_resource_cursor = db.featured_resources.find().sort("date_featured", 1)
     featured_resource =  ""
     all_featured_resources =  []
     #Adding functionality for filtering by topic. Refactor this to be more efficient.
-    if topic_keyword is not None:
+    if filter_topics is not None:
         for resource in featured_resource_cursor:
             featured_resource = resource
-            if topic_keyword in featured_resource['topics']:
+            if bool(set(filter_topics).intersection(set(featured_resource['topics']))):
                 all_featured_resources.append(featured_resource)
     else:
         for resource in featured_resource_cursor:
