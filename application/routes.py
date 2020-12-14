@@ -29,24 +29,33 @@ def podcasts_bootstrap():
 @app.route("/archives-bootstrap", methods=['GET','POST'])
 def archives_bootstrap():
     distinct_topic_list = get_all_topics()
+    filters_checked = []
+    featured_resources = []
 
-    #THIS IS WHERE IM GETTING USER CHECKBOX SELECTIONS
-    #Grab any checkbox selections and put them into a list
-    filters_checked = request.form.getlist('check')
+    #Do the following assuming filters have not been cleared
+    if request.form.get('clearFilters') == None:
+        #THIS IS WHERE IM GETTING USER CHECKBOX SELECTIONS
+        #Grab any checkbox selections and put them into a list
+        filters_checked = request.form.getlist('check')
 
-    #Boolean to check if any checkbox were selected
-    filters_exist = bool(filters_checked)
-    
-    #If user selected any filters, filter resources by those topics, else return all featured resources
-    if filters_exist:
-        featured_resources = get_all_featured_resources(filter_topics=filters_checked)
+        #Boolean to check if any checkbox were selected
+        filters_exist = bool(filters_checked)
+        
+        #If user selected any filters, filter resources by those topics, else return all featured resources
+        if filters_exist:
+            featured_resources = get_all_featured_resources(filter_topics=filters_checked)
+        else:
+            featured_resources = get_all_featured_resources()
+                
+    #If user clicked to clear filters
     else:
         featured_resources = get_all_featured_resources()
-    
+
     for featured_resource in featured_resources:
         featured_resource['publish_date'] =  str(featured_resource['publish_date'])[:10]
 
-    return render_template("archives_bootstrap.html", featured_resources=featured_resources, distinct_topic_list=distinct_topic_list, title="Archives")
+    return render_template("archives_bootstrap.html", featured_resources=featured_resources, filters_checked=filters_checked,
+                            distinct_topic_list=distinct_topic_list, title="Archives")
 
 
 @app.route("/about-us")

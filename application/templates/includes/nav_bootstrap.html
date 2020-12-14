@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-dark navbar-expand-sm navbar-fixed-top" role='navigation'>
+<nav class="navbar navbar-dark bg-dark navbar-expand-sm navbar-fixed-top sticky-top" role='navigation'>
     <div class="container">
   
       <button class="navbar-toggler" type="button"
@@ -12,7 +12,7 @@
   
       <div class="collapse navbar-collapse" id="myTogglerNav">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="{{ url_for('home_bootstrap') }}">Home</a>
+          <a class="nav-item nav-link" href="{{ url_for('home_bootstrap') }}">Home</a>
           <a class="nav-item nav-link" href="{{ url_for('podcasts_bootstrap') }}">Podcasts</a>
           <a class="nav-item nav-link" href="{{ url_for('archives_bootstrap') }}">Archives</a>
           <a class="nav-item nav-link" href="{{ url_for('about_us') }}">About Us</a>
