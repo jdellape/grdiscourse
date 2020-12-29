@@ -6,21 +6,24 @@
     <div class="row justify-content-center align-items-center">
         <form name="archive_search_form" id="archive_search_form" action="{{url_for('archives_bootstrap')}}" method="POST">
             <div class="form-group">
-                <label>Select Topics to Filter By</label>
+                <label class="d-flex justify-content-center align-items-center">Select Topics to Filter By</label><br>
                 {% for topic in distinct_topic_list %}
-                <div class="form-check form-check-inline">
-                    <label>
-                    <!-- Persist checkboxes selected by user -->
-                    {% if topic in filters_checked %}
-                    <input type="checkbox" name="check" value={{topic}} checked>{{topic}}
-                    {% else %}
-                    <input type="checkbox" name="check" value={{topic}}>{{topic}}
-                    {% endif %}
-                    </label>
-                </div><!-- form-check -->
+                <div class="form-check-inline">
+                    <ul class="ks-cboxtags">
+                        <!-- <li><input type="checkbox" id="checkboxOne" value="Rainbow Dash"><label for="checkboxOne">Rainbow Dash</label></li> -->
+                        <li>
+                                <!-- Persist checkboxes selected by user -->
+                                {% if topic in filters_checked %}
+                                <input type="checkbox" id="checkbox_{{topic}}" name="check" value={{topic}} checked><label for="checkbox_{{topic}}">{{topic}}</label>
+                                {% else %}
+                                <input type="checkbox" id="checkbox_{{topic}}" name="check" value={{topic}}><label for="checkbox_{{topic}}">{{topic}}</label>
+                                {% endif %}
+                        </li>
+                    </ul>
+                </div><!-- form-checkbox container -->
                 {%endfor%}
             </div><!-- form-group -->
-            <div class="form-group justify-content-center align-items-center">
+            <div class="form-group d-flex justify-content-center align-items-center">
                 <button class="btn btn-primary" type="submit" value="Apply fitlers value">Apply Filter</button>
                 <button class="btn btn-seconday" type="submit" name="clearFilters" value="clearClicked">Clear Filters</button>
             </div>
@@ -29,27 +32,29 @@
 </div>
 
 <!-- Show content which has been featured -->
-<div class="container">
+<div class="container mt-5">
     {% for featured_resource in featured_resources %}
-    <div class="row row-cols-2 d-flex">
-        <div class="col d-flex">
-            <section class="card mb-5 bg-dark text-white">
-            <img class="card-img-top" src={{featured_resource['resource_image_url']}} >
-            <div class="card-body">
-                <h3 class="card-title">{{featured_resource['resource_title']}} </h2>
-                <h5 class="card-subtitle">Released: {{featured_resource['publish_date']}}</h5>
+    <div class="card mt-4">
+        <div class="row">
+            <div class="col-md-2 d-flex align-items-center justify-content-center">
+                <img src={{featured_resource['resource_image_url']}} class="img-fluid">
             </div>
-            <audio class="img-fluid" controls preload="none" controlsList="nodownload">
-                <source src={{featured_resource['podcast_episode_player_url']}} type="audio/mpeg">
-            </audio>
-            </section><!-- card -->
-        </div><!-- column -->
-        <div class="col d-flex">
-            <p class="text-white">{{featured_resource['description']}}</p>
-        </div>
-    </div><!-- row div -->
+            <div class="col-md-10">
+                <h3 class="card-title mt-2">{{featured_resource['resource_title']}} </h3>
+                <p class="card-text">{{featured_resource['description']}}</p>
+                <p class="card-text">Topic(s): {{featured_resource['topics']}}</p>
+                <p class="card-text">Released: {{featured_resource['publish_date']}}</p>
+                <audio class="img-fluid justify-content-center" controls preload="none" controlsList="nodownload">
+                    <source src={{featured_resource['podcast_episode_player_url']}} type="audio/mpeg">
+                </audio>
+                <div class="list-group mb-3">
+                    <a class="list-group-item list-group-item-action" href="#">LAUNCH IN APPLE PODCASTS</a>
+                    <a class="list-group-item list-group-item-action" href="#">LAUNCH IN SPOTIFY</a>
+                </div>
+            </div>
+        </div> <!-- row Div -->
+    </div> <!-- Card Div -->
     {%endfor%}
 </div>
-
 
 {% endblock %}

@@ -6,7 +6,7 @@
         {% for podcast in podcasts %}
         <div class="col d-flex">
             <section class="card mb-5 bg-dark text-white" onclick="window.open('{{podcast.web_page}}');">
-            <img class="card-img-top" src={{podcast.artwork}}>
+            <img class="card-img-top h-25" src={{podcast.artwork}}>
             <div class="card-body">
                 <h2 class="card-title">{{podcast.name}}</h2>
                 <p class="card-text">{{podcast.description}}</p>

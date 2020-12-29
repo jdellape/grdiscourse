@@ -9,7 +9,7 @@ PODCAST_IDS = ['1495107302','591157388','1289898626','1212429230','1072608281','
 
 FETCH_ALL_PODCASTS_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcast'.format(','.join(PODCAST_IDS))
 
-FINAL_ARTWORK_DIMENSIONS = '313x313'
+FINAL_ARTWORK_DIMENSIONS = '150x150'
 
 #Podcast Episodes
 FETCH_RECENT_PODCAST_EPISODES_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcastEpisode&limit=1'.format(','.join(PODCAST_IDS))
@@ -136,36 +136,20 @@ def get_featured_resource():
     return featured_resource
 
 def get_all_featured_resources(filter_topics=None):
-    #Get mongo cursor object for featured_resources collection and grab current resource to feature
-    featured_resource_cursor = db.featured_resources.find().sort("date_featured", 1)
-    featured_resource =  ""
+    #Query MongoDB to select featured resources given the topic filters selected by user
     all_featured_resources =  []
-    #Adding functionality for filtering by topic. Refactor this to be more efficient.
+
     if filter_topics is not None:
-        for resource in featured_resource_cursor:
-            featured_resource = resource
-            if bool(set(filter_topics).intersection(set(featured_resource['topics']))):
-                all_featured_resources.append(featured_resource)
+        all_featured_resources = list(db.featured_resources.find({ "topics" : { "$in" : filter_topics} }).sort("date_featured", 1))
     else:
-        for resource in featured_resource_cursor:
-            featured_resource = resource
-            all_featured_resources.append(featured_resource)
+        all_featured_resources = list(db.featured_resources.find().sort("date_featured", 1))
+
     return all_featured_resources
 
 def get_all_topics():
-    #Get a set of all the topics within mongo database
-    #Opportunity to refactor here. Try to get the distinct list using a MongoDB Query
-    all_topic_arrays = db.featured_resources.find({},{"topics":1, "_id": 0})
-    #Create an empty set
-    topic_set = set()
-
-    for topic_array in all_topic_arrays:
-        topics = topic_array['topics']
-        for topic in topics:
-            #Add to my set
-            topic_set.add(topic)
-    distinct_topic_list = list(topic_set)
-    distinct_topic_list.sort()
+    #Get a set of all the topics within featured_resources collection
+    distinct_topic_list = db.featured_resources.distinct("topics")
+    distinct_topic_list = list(filter(None, distinct_topic_list)) 
 
     #Return all distinct topics 
     return distinct_topic_list
