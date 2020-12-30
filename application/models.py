@@ -9,7 +9,7 @@ PODCAST_IDS = ['1495107302','591157388','1289898626','1212429230','1072608281','
 
 FETCH_ALL_PODCASTS_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcast'.format(','.join(PODCAST_IDS))
 
-FINAL_ARTWORK_DIMENSIONS = '150x150'
+FINAL_ARTWORK_DIMENSIONS = '300x300'
 
 #Podcast Episodes
 FETCH_RECENT_PODCAST_EPISODES_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcastEpisode&limit=1'.format(','.join(PODCAST_IDS))

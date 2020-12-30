@@ -1,7 +1,7 @@
 
 ul.ks-cboxtags {
     list-style: none;
-    padding: 20px;
+    padding: 5px;
 }
 ul.ks-cboxtags li{
   display: inline;
@@ -10,8 +10,8 @@ ul.ks-cboxtags li label{
     display: inline-block;
     background-color: rgba(255, 255, 255, .9);
     border: 2px solid rgba(139, 139, 139, .3);
-    color: #adadad;
-    border-radius: 25px;
+    color: #000000;
+    border-radius: 25px;  /* this makes it look rounded */
     white-space: nowrap;
     margin: 3px 0px;
     -webkit-touch-callout: none;
@@ -36,8 +36,8 @@ ul.ks-cboxtags li label::before {
     -webkit-font-smoothing: antialiased;
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    font-size: 12px;
-    padding: 2px 6px 2px 2px;
+    font-size: 10px;
+    padding: 2px 2px 2px 2px;
     content: "\f067";
     transition: transform .3s ease-in-out;
 }
@@ -49,8 +49,8 @@ ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
 }
 
 ul.ks-cboxtags li input[type="checkbox"]:checked + label {
-    border: 2px solid #1bdbf8;
-    background-color: #12bbd4;
+    border: 2px solid #0275d8;
+    background-color: #0275d8;
     color: #fff;
     transition: all .2s;
 }
@@ -63,5 +63,5 @@ ul.ks-cboxtags li input[type="checkbox"] {
   opacity: 0;
 }
 ul.ks-cboxtags li input[type="checkbox"]:focus + label {
-  border: 2px solid #e9a1ff;
+  border: 2px solid #FFFFFF;
 }

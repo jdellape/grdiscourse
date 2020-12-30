@@ -1,20 +1,23 @@
 
 {% extends "layout_bootstrap.html" %}
 {% block content %}
-<div class="container">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 d-flex">
-        {% for podcast in podcasts %}
-        <div class="col d-flex">
-            <section class="card mb-5 bg-dark text-white" onclick="window.open('{{podcast.web_page}}');">
-            <img class="card-img-top h-25" src={{podcast.artwork}}>
-            <div class="card-body">
-                <h2 class="card-title">{{podcast.name}}</h2>
-                <p class="card-text">{{podcast.description}}</p>
+<div class="container mt-3">
+    {% for podcast in podcasts %}
+    <div class="card mt-4 bg-dark text-white">
+        <div class="row">
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
+                <img src={{podcast.artwork}} class="img-fluid">
             </div>
-            </section><!-- card -->
-        </div><!-- column -->
-        {%endfor%} 
-    </div><!-- row div -->
-
-</div> <!-- content container -->
+            <div class="col-md-8">
+                <h3 class="card-title mt-2">{{podcast.name}} </h3>
+                <p class="card-text">{{podcast.description}}</p>
+                    <div class="list-group align-items-bottom">
+                        <a class="list-group-item list-group-item-action" href={{podcast.web_page}} target="_blank">LAUNCH IN APPLE PODCASTS</a>
+                        <a class="list-group-item list-group-item-action" href="#">LAUNCH IN SPOTIFY</a>
+                    </div>
+            </div>
+        </div> <!-- row Div -->
+    </div> <!-- Card Div -->
+    {%endfor%} 
+</div>
 {% endblock %}
