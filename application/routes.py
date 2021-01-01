@@ -11,6 +11,9 @@ def home_bootstrap():
     #Get podcasts episodes sorted from most recent to oldest and present it to the user
     podcast_episodes = get_all_podcast_episodes()
 
+    for idx, podcast in enumerate(podcast_episodes):
+        podcast.set_podcast_number(str(idx))
+
     #Get the featured resource
     featured_resource = get_featured_resource()
     featured_resource['publish_date'] =  str(featured_resource['publish_date'])[:10]

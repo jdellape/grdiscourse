@@ -77,6 +77,15 @@ class PodcastEpisode:
 
     def set_podcast_episode_datetime_release(self, release_date_datetime):
         self.release_date_datetime = release_date_datetime
+
+    '''
+    This needs refactored. Was put in place to verify I could isoalte description
+    of the "Recent Episodes" section. Which is going to get removed anyway.
+    Will need this type of functinality for the archives page though. Probably will just
+    append the unique podcast episode id to everything to get it to work correctly.
+    '''
+    def set_podcast_number(self, podcast_number):
+        self.podcast_number = podcast_number
     
     def reset_artwork_dimensions(self, artwork):
         artwork_url_chunks = artwork.split("/")
