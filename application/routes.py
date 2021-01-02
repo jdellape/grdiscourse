@@ -29,8 +29,8 @@ def podcasts_bootstrap():
     return render_template("podcast_shows_bootstrap.html", podcasts=podcasts, title="Podcasts")
 
 
-@app.route("/archives-bootstrap", methods=['GET','POST'])
-def archives_bootstrap():
+@app.route("/collection", methods=['GET','POST'])
+def collection():
     distinct_topic_list = get_all_topics()
     filters_checked = []
     featured_resources = []
@@ -57,7 +57,7 @@ def archives_bootstrap():
     for featured_resource in featured_resources:
         featured_resource['publish_date'] =  str(featured_resource['publish_date'])[:10]
 
-    return render_template("archives_bootstrap.html", featured_resources=featured_resources, filters_checked=filters_checked,
+    return render_template("collection.html", featured_resources=featured_resources, filters_checked=filters_checked,
                             distinct_topic_list=distinct_topic_list, title="Archives")
 
 
