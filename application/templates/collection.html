@@ -1,4 +1,4 @@
-{% extends "layout_bootstrap.html" %}
+{% extends "layout.html" %}
 {% block content %}
 
 <!-- Section to filter content -->
@@ -10,7 +10,6 @@
                 {% for topic in distinct_topic_list %}
                 <div class="form-check-inline">
                     <ul class="ks-cboxtags ml-1 p-0">
-                        <!-- <li><input type="checkbox" id="checkboxOne" value="Rainbow Dash"><label for="checkboxOne">Rainbow Dash</label></li> -->
                         <li>
                                 <!-- Persist checkboxes selected by user -->
                                 {% if topic in filters_checked %}
@@ -35,47 +34,10 @@
 <div class="container mt-3">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         {% for featured_resource in featured_resources %}
-        <div class="col">
-            <section class="card mb-5 bg-dark text-white">
-                <img class="card-img-top" src={{featured_resource['resource_image_url_300']}}>
-                <div class="card-body">
-                    <h3 class="card-title">{{featured_resource['resource_title']}}</h3>
-                    <h5 class="card-text">Topics: {{featured_resource['topics']}}</h5>
-                    <h5 class="card-text">Released: {{featured_resource['publish_date']}}</h5>
-                    <div class="accordion" id="description-accordion{{featured_resource['podcast_episode_id']}}">
-                        <!-- Embedded card to support accordion for EPISODE description -->
-                        <div class="card mt-2">
-                            <div class="card-header" id="description-heading{{featured_resource['podcast_episode_id']}}">
-                                <h6>
-                                    <a href="#description{{featured_resource['podcast_episode_id']}}"
-                                      data-toggle="collapse"
-                                      aria-expanded="true"
-                                      aria-controls="description{{featured_resource['podcast_episode_id']}}"
-                                    >VIEW EPISODE DESCRIPTION</a>
-                                </h6>
-                            </div><!-- episode description header -->
-                            <div id="description{{featured_resource['podcast_episode_id']}}"
-                                class="collapse"
-                                data-parent="#description-accordion{{featured_resource['podcast_episode_id']}}"
-                                aria-labelledby="description-heading{{featured_resource['podcast_episode_id']}}">
-                                <div class="card-body">
-                                    <p class="text-dark">{{featured_resource['description']}}</p>
-                                </div> <!-- card body (Episode Description)-->
-                            </div> <!-- collapse -->
-                        </div> <!-- inner card for descriptions --> 
-                    </div><!-- accordion -->
-                                    <!-- Launch the Podcast with App -->
-                    <div class="list-group mb-0">
-                        <a class="list-group-item list-group-item-action text-primary" href={{featured_resource['apple_podcasts_url']}} target="_blank">LAUNCH IN APPLE PODCASTS</a>
-                        <a class="list-group-item list-group-item-action text-primary" href="#">LAUNCH IN SPOTIFY</a>
-                    </div><!-- list group -->
-                </div><!-- card body -->
-                <!-- play the podcast episode within browser -->
-                <audio class="img-fluid" controls preload="none" controlsList="nodownload">
-                    <source src={{featured_resource['podcast_episode_player_url']}} type="audio/mpeg">
-                </audio> <!-- audio -->
-            </section><!-- card -->
-        </div><!-- column -->
+
+            <!-- Display podcast episode information using card template -->
+            {% include "includes/podcast_episode_card.html" %}
+
         {%endfor%}
     </div><!-- row div -->
 </div><!-- Outer Container Div -->

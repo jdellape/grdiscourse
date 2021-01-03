@@ -6,10 +6,11 @@ from datetime import datetime
 
 
 @app.route("/")
-@app.route("/home-bootstrap")
-def home_bootstrap():
+@app.route("/home")
+def home():
     #Get podcasts episodes sorted from most recent to oldest and present it to the user
     podcast_episodes = get_all_podcast_episodes()
+    distinct_topic_list = get_all_topics()
 
     for idx, podcast in enumerate(podcast_episodes):
         podcast.set_podcast_number(str(idx))
@@ -18,15 +19,16 @@ def home_bootstrap():
     featured_resource = get_featured_resource()
     featured_resource['publish_date'] =  str(featured_resource['publish_date'])[:10]
     
-    return render_template("home_bootstrap.html", podcast_episodes=podcast_episodes, featured_resource=featured_resource, title="Home")
+    return render_template("home.html", podcast_episodes=podcast_episodes, featured_resource=featured_resource, title="Home",
+                            distinct_topic_list=distinct_topic_list)
 
 
-@app.route("/podcasts-bootstrap")
-def podcasts_bootstrap():
+@app.route("/podcasts")
+def podcasts():
     #Get all podcasts from .models and present it to the user
     podcasts = get_all_podcasts()
 
-    return render_template("podcast_shows_bootstrap.html", podcasts=podcasts, title="Podcasts")
+    return render_template("podcasts.html", podcasts=podcasts, title="Podcasts")
 
 
 @app.route("/collection", methods=['GET','POST'])
