@@ -5,7 +5,7 @@
 <div class="container text-white">
     <div class="row justify-content-center align-items-center">
         <form name="archive_search_form" id="archive_search_form" action="{{url_for('collection')}}" method="POST">
-            <div class="form-group">
+            <div class="form-group mb-0">
                 <label class="d-flex justify-content-center align-items-center mb-0">Select Topics to Filter By</label><br>
                 {% for topic in distinct_topic_list %}
                 <div class="form-check-inline">
@@ -23,8 +23,8 @@
                 {%endfor%}
             </div><!-- form-group -->
             <div class="form-group d-flex justify-content-center align-items-center">
-                <button class="btn btn-primary" type="submit" value="Apply fitlers value">Apply Filter</button>
-                <button class="btn btn-seconday" type="submit" name="clearFilters" value="clearClicked">Clear Filters</button>
+                <button class="btn btn-primary mr-2" type="submit" value="Apply fitlers value">Apply Filter</button>
+                <button class="btn btn-warning" type="submit" name="clearFilters" value="clearClicked">Clear Filter</button>
             </div>
         </form>
     </div>
