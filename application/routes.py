@@ -1,5 +1,5 @@
 from application import app
-from .models import get_all_podcasts, get_all_podcast_episodes, get_featured_resource, get_all_featured_resources, get_all_topics
+from .models import get_all_podcasts, get_featured_resource, get_all_featured_resources, get_all_topics
 from flask import json, render_template, request
 import requests
 from datetime import datetime
@@ -9,17 +9,13 @@ from datetime import datetime
 @app.route("/home")
 def home():
     #Get podcasts episodes sorted from most recent to oldest and present it to the user
-    podcast_episodes = get_all_podcast_episodes()
     distinct_topic_list = get_all_topics()
-
-    for idx, podcast in enumerate(podcast_episodes):
-        podcast.set_podcast_number(str(idx))
 
     #Get the featured resource
     featured_resource = get_featured_resource()
-    featured_resource['publish_date'] =  str(featured_resource['publish_date'])[:10]
+    featured_resource['publish_date'] =  str(featured_resource['releaseDate'])[:10]
     
-    return render_template("home.html", podcast_episodes=podcast_episodes, featured_resource=featured_resource, title="Home",
+    return render_template("home.html", featured_resource=featured_resource, title="Home",
                             distinct_topic_list=distinct_topic_list)
 
 
@@ -39,8 +35,7 @@ def collection():
 
     #Do the following assuming filters have not been cleared
     if request.form.get('clearFilters') == None:
-        #THIS IS WHERE IM GETTING USER CHECKBOX SELECTIONS
-        #Grab any checkbox selections and put them into a list
+        #Grab any checkbox selections made by user and put them into a list
         filters_checked = request.form.getlist('check')
 
         #Boolean to check if any checkbox were selected
@@ -51,13 +46,14 @@ def collection():
             featured_resources = get_all_featured_resources(filter_topics=filters_checked)
         else:
             featured_resources = get_all_featured_resources()
-                
     #If user clicked to clear filters
     else:
         featured_resources = get_all_featured_resources()
 
+    #Loop through the episodes and set a string attribute for displaying the date it was published (released)
+    #This should be refactored by just storing this as a field in each podcast episode doc in mongo
     for featured_resource in featured_resources:
-        featured_resource['publish_date'] =  str(featured_resource['publish_date'])[:10]
+        featured_resource['publish_date'] =  str(featured_resource['releaseDate'])[:10]
 
     return render_template("collection.html", featured_resources=featured_resources, filters_checked=filters_checked,
                             distinct_topic_list=distinct_topic_list, title="Archives")

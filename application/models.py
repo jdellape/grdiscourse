@@ -11,9 +11,6 @@ FETCH_ALL_PODCASTS_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcast'
 
 FINAL_ARTWORK_DIMENSIONS = '300x300'
 
-#Podcast Episodes
-FETCH_RECENT_PODCAST_EPISODES_URL = 'https://itunes.apple.com/lookup?id={0}&entity=podcastEpisode&limit=1'.format(','.join(PODCAST_IDS))
-
 #Not finding podcast description via api so building a dict {id:description} to store
 PODCAST_DESCRIPTIONS = {
   "591157388"  : "Join VeggieTales and What’s in the Bible? creator Phil Vischer and co-host Skye Jethani \
@@ -46,6 +43,7 @@ PODCAST_DESCRIPTIONS = {
                  with Christian leaders, thinkers, bloggers, authors and theologians."
 }
 
+#Modeling Podcast show information. Needs to be moved to a MongoDB collection.
 class Podcast:
     def __init__(self, _id, name, web_page, artwork):
         self._id = _id
@@ -65,37 +63,7 @@ class Podcast:
     def set_description(self):
         self.description = PODCAST_DESCRIPTIONS[str(self._id)]
 
-class PodcastEpisode:
-    def __init__(self, episode_name, episode_url, episode_player_url, release_date, short_description, long_description, artwork):
-        self.episode_name = episode_name
-        self.episode_url = episode_url
-        self.episode_player_url = episode_player_url
-        self.release_date = release_date
-        self.short_description = short_description
-        self.long_description = long_description
-        self.artwork = artwork
-
-    def set_podcast_episode_datetime_release(self, release_date_datetime):
-        self.release_date_datetime = release_date_datetime
-
-    '''
-    This needs refactored. Was put in place to verify I could isoalte description
-    of the "Recent Episodes" section. Which is going to get removed anyway.
-    Will need this type of functinality for the archives page though. Probably will just
-    append the unique podcast episode id to everything to get it to work correctly.
-    '''
-    def set_podcast_number(self, podcast_number):
-        self.podcast_number = podcast_number
-    
-    def reset_artwork_dimensions(self, artwork):
-        artwork_url_chunks = artwork.split("/")
-        original_last_chunk = artwork_url_chunks[-1]
-        artwork_url_chunks.pop()
-        new_last_chunk = FINAL_ARTWORK_DIMENSIONS + original_last_chunk[7:]
-        artwork_url_chunks.append(new_last_chunk)
-        artwork_url_chunks[0] = artwork_url_chunks[0] + "/"
-        self.artwork = "/".join(artwork_url_chunks)
-
+#Get data related to all the podcasts we recommend (as defined by ids above)
 def get_all_podcasts():
     #Get all podcast information according to the podcast IDS of interest
     api_response = requests.get(FETCH_ALL_PODCASTS_URL)
@@ -107,41 +75,14 @@ def get_all_podcasts():
         podcast.set_description()
     return podcasts
 
-def get_all_podcast_episodes():
-    #Get all podcast information according to the podcast IDS of interest
-    api_response = requests.get(FETCH_RECENT_PODCAST_EPISODES_URL)
-    podcast_episodes_json = api_response.json()
-    podcast_episodes_results = podcast_episodes_json['results']
-    podcast_episodes = []
-    for result in podcast_episodes_results:
-        episode = ""
-        try:
-            episode = PodcastEpisode(result['trackName'], result['trackViewUrl'], result['episodeUrl'], result['releaseDate'], 
-                            result['shortDescription'], result['description'], result['artworkUrl160'])
-            episode.reset_artwork_dimensions(episode.artwork)
-            podcast_episodes.append(episode)
-        except:
-            pass
-    
-    #Loop to set a datetime object within each episode object
-    for ep in podcast_episodes:
-        ep.release_date = ep.release_date[:10]
-        time_in_datetime = datetime.strptime(ep.release_date, "%Y-%m-%d")
-        ep.set_podcast_episode_datetime_release(time_in_datetime)
-    #Sort my list according to the datetime value I input (most recent eps should display first)
-    podcast_episodes.sort(reverse=True, key=lambda x: x.release_date_datetime)
-
-    return podcast_episodes
-
+#Functions for retrieving data from MongoDB collection
 def get_featured_resource():
     #Get mongo cursor object for featured_resources collection and grab current resource to feature
-    featured_resource_cursor = db.featured_resources.find().sort("date_featured", 1).limit(1)
+    featured_resource_cursor = db.featured_resources.find({"currentFeature":True}).limit(1)
     featured_resource =  ""
     for resource in featured_resource_cursor:
         featured_resource = resource
-    # if featured_resource['resource_type'] == 'Podcast':
-    #     #Change this to a PodcastEpisode
-    #     # featured_resource = PodcastEpisode()
+
     return featured_resource
 
 def get_all_featured_resources(filter_topics=None):
@@ -149,9 +90,9 @@ def get_all_featured_resources(filter_topics=None):
     all_featured_resources =  []
 
     if filter_topics is not None:
-        all_featured_resources = list(db.featured_resources.find({ "topics" : { "$in" : filter_topics} }).sort("date_featured", 1))
+        all_featured_resources = list(db.featured_resources.find({ "topics" : { "$in" : filter_topics} }).sort("releaseDate", -1))
     else:
-        all_featured_resources = list(db.featured_resources.find().sort("date_featured", 1))
+        all_featured_resources = list(db.featured_resources.find().sort("releaseDate", -1))
 
     return all_featured_resources
 

@@ -8,72 +8,8 @@
 <!-- Show the currently featured episode -->
 <div class="container mt-3">
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-      <div class="col mx-auto">
-          <section class="card mb-5 bg-dark text-white">
-              <img class="card-img-top" src={{featured_resource['resource_image_url_300']}}>
-              <div class="card-body">
-                  <h3 class="card-title">{{featured_resource['resource_title']}}</h3>
-                  <h5 class="card-text">Topics: {{featured_resource['topics']}}</h5>
-                  <h5 class="card-text">Released: {{featured_resource['publish_date']}}</h5>
-                  <div class="accordion" id="description-accordion{{featured_resource['podcast_episode_id']}}">
-                      <!-- Embedded card to support accordion for EPISODE description -->
-                      <div class="card mt-2">
-                          <div class="card-header" id="episode-description-heading{{featured_resource['podcast_episode_id']}}">
-                              <h6>
-                                  <a href="#episode-description{{featured_resource['podcast_episode_id']}}"
-                                    data-toggle="collapse"
-                                    aria-expanded="true"
-                                    aria-controls="episode-description{{featured_resource['podcast_episode_id']}}"
-                                  >VIEW EPISODE DESCRIPTION</a>
-                              </h6>
-                          </div><!-- episode description header -->
-                          <div id="episode-description{{featured_resource['podcast_episode_id']}}"
-                              class="collapse"
-                              data-parent="#description-accordion{{featured_resource['podcast_episode_id']}}"
-                              aria-labelledby="episode-description-heading{{featured_resource['podcast_episode_id']}}">
-                              <div class="card-body">
-                                  <p class="text-dark">{{featured_resource['description']}}</p>
-                              </div> <!-- card body (Episode Description)-->
-                          </div> <!-- collapse -->
-                      </div> <!-- inner card for episode descriptions -->
-
-                       <!-- Embedded card to support accordion for PODCAST description -->
-                      <div class="card">
-                          <div class="card-header" id="podcast-description-heading{{featured_resource['podcast_episode_id']}}">
-                              <h6>
-                                  <a href="#podcast-description{{featured_resource['podcast_episode_id']}}"
-                                    data-toggle="collapse"
-                                    aria-expanded="true"
-                                    aria-controls="description{{featured_resource['podcast_episode_id']}}"
-                                  >VIEW PODCAST DESCRIPTION</a>
-                              </h6>
-                          </div><!-- podcast description header -->
-                          <div id="podcast-description{{featured_resource['podcast_episode_id']}}"
-                              class="collapse"
-                              data-parent="#description-accordion{{featured_resource['podcast_episode_id']}}"
-                              aria-labelledby="podcast-description-heading{{featured_resource['podcast_episode_id']}}">
-                              <div class="card-body">
-                                  <p class="text-dark">Join VeggieTales and What’s in the Bible? creator Phil Vischer and co-host Skye Jethani
-                          (author, senior editor Christianity Today’s Leadership Journal) for a fast-paced and often
-                          funny conversation about pop culture, media, theology and the fun, fun, fun of living a
-                          thoughtful Christian life in an increasingly post-Christian culture.</p>
-                              </div> <!-- card body (Podcast Description)-->
-                          </div> <!-- collapse -->
-                      </div> <!-- inner card for podcast descriptions --> 
-
-                  </div><!-- accordion -->
-                                  <!-- Launch the Podcast with App -->
-                  <div class="list-group mb-0">
-                      <a class="list-group-item list-group-item-action text-primary" href={{featured_resource['apple_podcasts_url']}} target="_blank">LAUNCH IN APPLE PODCASTS</a>
-                      <a class="list-group-item list-group-item-action text-primary" href="#">LAUNCH IN SPOTIFY</a>
-                  </div><!-- list group -->
-              </div><!-- card body -->
-              <!-- play the podcast episode within browser -->
-              <audio class="img-fluid" controls preload="none" controlsList="nodownload">
-                  <source src={{featured_resource['podcast_episode_player_url']}} type="audio/mpeg">
-              </audio> <!-- audio -->
-          </section><!-- card -->
-      </div><!-- column -->
+      <!-- Display featured podcast episode information using card template -->
+      {% include "includes/featured_podcast_episode_card.html" %}
   </div><!-- row div -->
 </div><!-- Outer Container Div -->
 
