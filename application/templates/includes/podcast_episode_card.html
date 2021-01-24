@@ -1,6 +1,6 @@
 <div class="col">
-    <section class="card mb-5 bg-dark text-white">
-        <img class="card-img-top" src={{featured_resource['artworkUrl300']}}>
+    <section class="card mb-2 bg-dark text-white">
+        <img class="card-img-top mx-auto" src={{featured_resource['artworkUrl300']}} style="width:50%">
         <div class="card-body">
             <h3 class="card-title">{{featured_resource['trackName']}}</h3>
             <h5 class="card-text">Topics: {{featured_resource['topics']}}</h5>
@@ -34,8 +34,9 @@
             </div><!-- list group -->
         </div><!-- card body -->
         <!-- play the podcast episode within browser -->
-        <audio class="img-fluid" controls preload="none" controlsList="nodownload">
+        <!-- <audio class="img-fluid" controls preload="none" controlsList="nodownload">
             <source src={{featured_resource['episodeUrl']}} type="audio/mpeg">
-        </audio> <!-- audio -->
+        </audio>  -->
+        <!-- audio -->
     </section><!-- card -->
 </div><!-- column -->

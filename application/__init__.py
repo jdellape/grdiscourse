@@ -6,8 +6,10 @@ load_dotenv()
 
 app = Flask(__name__)
 
+#Establish connection to Mongo, load db object then close connection
 client = MongoClient(Config.DB_URI)
 db = client.get_database('grdiscourse')
+client.close()
 
 from application import routes
 from application import models
