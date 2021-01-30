@@ -1,10 +1,17 @@
 <div class="col">
     <section class="card mb-2 bg-dark text-white">
-        <img class="card-img-top mx-auto" src={{featured_resource['artworkUrl300']}} style="width:50%">
+        <!--row for side by side podcast image and episode name -->
+        <div class="row align-items-start">
+            <div class="col-4">
+                <img src={{featured_resource['artworkUrl100']}}>
+            </div><!--podcast image col -->
+            <div class="col-8">
+                <a class="card-title text-white h5" href={{featured_resource['trackViewUrl']}} target="_blank">{{featured_resource['trackName']}}</a>
+            </div><!--podcast episode name col -->
+        </div> <!--row -->
         <div class="card-body">
-            <h3 class="card-title">{{featured_resource['trackName']}}</h3>
-            <h5 class="card-text">Topics: {{featured_resource['topics']}}</h5>
-            <h5 class="card-text">Released: {{featured_resource['publish_date']}}</h5>
+            <h7 class="card-text">Topics: {{featured_resource['topics']}}</h7><br/>
+            <h7 class="card-text">Released: {{featured_resource['publish_date']}}</h7>
             <div class="accordion" id="description-accordion{{featured_resource['trackId']}}">
                 <!-- Embedded card to support accordion for EPISODE description -->
                 <div class="card mt-2">
@@ -27,16 +34,12 @@
                     </div> <!-- collapse -->
                 </div> <!-- inner card for descriptions --> 
             </div><!-- accordion -->
-                            <!-- Launch the Podcast with App -->
-            <div class="list-group mb-0">
+            <!-- Launch the Podcast with App -->
+            <!-- <div class="list-group mb-0">
                 <a class="list-group-item list-group-item-action text-primary" href={{featured_resource['trackViewUrl']}} target="_blank">LAUNCH IN APPLE PODCASTS</a>
                 <a class="list-group-item list-group-item-action text-primary" href="#">LAUNCH IN SPOTIFY</a>
-            </div><!-- list group -->
+            </div> -->
+            <!-- list group -->
         </div><!-- card body -->
-        <!-- play the podcast episode within browser -->
-        <!-- <audio class="img-fluid" controls preload="none" controlsList="nodownload">
-            <source src={{featured_resource['episodeUrl']}} type="audio/mpeg">
-        </audio>  -->
-        <!-- audio -->
     </section><!-- card -->
 </div><!-- column -->

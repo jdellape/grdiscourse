@@ -3,35 +3,38 @@
 
 <!-- Section to filter content -->
 <div class="container text-white">
-    <div class="row justify-content-center align-items-center">
+    <div class="row mx-auto justify-content-center align-items-center">
+        <div class="container">
         <form name="archive_search_form" id="archive_search_form" action="{{url_for('collection')}}" method="POST">
-            <div class="form-group mb-0">
-                <label class="d-flex justify-content-center align-items-center mb-0">Select Topics to Filter By</label><br>
-                {% for topic in distinct_topic_list %}
-                <div class="form-check-inline">
-                    <ul class="ks-cboxtags ml-1 p-0">
-                        <li>
-                                <!-- Persist checkboxes selected by user -->
-                                {% if topic in filters_checked %}
-                                <input type="checkbox" id="checkbox_{{topic}}" name="check" value={{topic}} checked><label for="checkbox_{{topic}}">{{topic}}</label>
-                                {% else %}
-                                <input type="checkbox" id="checkbox_{{topic}}" name="check" value={{topic}}><label for="checkbox_{{topic}}">{{topic}}</label>
-                                {% endif %}
-                        </li>
-                    </ul>
-                </div><!-- form-checkbox container -->
-                {%endfor%}
-            </div><!-- form-group -->
+                <div class="form-group mb-3">
+                    <label class="d-flex justify-content-center align-items-center mb-0">Filter By Topics</label><br>
+                    {% for topic in distinct_topic_list %}
+                    <div class="form-check-inline justify-content-center align-items-center ml-0 mr-0 mt-0 mb-0">
+                    <!-- <div class="form-check-inline"> -->
+                        <ul class="ks-cboxtags ml-0 mr-0 mt-0 mb-0">
+                            <li>
+                                    <!-- Persist checkboxes selected by user -->
+                                    {% if topic in filters_checked %}
+                                    <input type="checkbox" id="checkbox_{{topic}}" name="check" value={{topic}} checked><label for="checkbox_{{topic}}">{{topic}}</label>
+                                    {% else %}
+                                    <input type="checkbox" id="checkbox_{{topic}}" name="check" value={{topic}}><label for="checkbox_{{topic}}">{{topic}}</label>
+                                    {% endif %}
+                            </li>
+                        </ul>
+                    </div><!-- form-checkbox container -->
+                    {%endfor%}
+                </div><!-- form-group -->
             <div class="form-group d-flex justify-content-center align-items-center">
                 <button class="btn btn-primary mr-2" type="submit" value="Apply fitlers value">Apply Filter</button>
                 <button class="btn btn-warning" type="submit" name="clearFilters" value="clearClicked">Clear Filter</button>
             </div>
         </form>
-    </div>
-</div>
+    </div><!-- form container -->
+    </div><!-- row  -->
+</div><!-- sectino 1 container -->
 
 <!-- Show content which has been featured -->
-<div class="container mt-3">
+<div class="container mt-2">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         {% for featured_resource in featured_resources %}
 

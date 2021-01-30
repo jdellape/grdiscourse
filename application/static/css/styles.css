@@ -1,15 +1,15 @@
 
 a.nav-item {
-  font-size: 1.5em !important;
+  font-size: 1.2em !important;
   }
 
 ul.ks-cboxtags {
     list-style: none;
-    padding: 5px;
+    padding: 0px;
 }
-ul.ks-cboxtags li{
+/* ul.ks-cboxtags li{
   display: inline;
-}
+} */
 ul.ks-cboxtags li label{
     display: inline-block;
     background-color: rgba(255, 255, 255, .9);
@@ -17,7 +17,7 @@ ul.ks-cboxtags li label{
     color: #000000;
     border-radius: 25px;  /* this makes it look rounded */
     white-space: nowrap;
-    margin: 3px 0px;
+    margin: 1px 0px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
