@@ -14,10 +14,10 @@
             <h7 class="card-text">Released: {{featured_resource['publish_date']}}</h7>
             <div class="accordion" id="description-accordion{{featured_resource['trackId']}}">
                 <!-- Embedded card to support accordion for EPISODE description -->
-                <div class="card mt-2">
-                    <div class="card-header" id="description-heading{{featured_resource['trackId']}}">
+                <div class="card mt-2 border border-secondary">
+                    <div class="card-header bg-dark" id="description-heading{{featured_resource['trackId']}}">
                         <h6>
-                            <a href="#description{{featured_resource['trackId']}}"
+                            <a class="text-white" href="#description{{featured_resource['trackId']}}"
                               data-toggle="collapse"
                               aria-expanded="true"
                               aria-controls="description{{featured_resource['trackId']}}"
@@ -28,8 +28,8 @@
                         class="collapse"
                         data-parent="#description-accordion{{featured_resource['trackId']}}"
                         aria-labelledby="description-heading{{featured_resource['trackId']}}">
-                        <div class="card-body">
-                            <p class="text-dark">{{featured_resource['shortDescription']}}</p>
+                        <div class="card-body bg-dark">
+                            <p class="text-white">{{featured_resource['shortDescription']}}</p>
                         </div> <!-- card body (Episode Description)-->
                     </div> <!-- collapse -->
                 </div> <!-- inner card for descriptions --> 
