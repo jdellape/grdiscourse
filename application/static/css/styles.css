@@ -1,3 +1,12 @@
+#footer{
+  height:50px;
+  padding:2px;
+  border-top:1px solid #ABABAB;
+  position:fixed;
+  left:0;
+  bottom:0;
+  width:100%
+}
 
 a.nav-item {
   font-size: 1.2em !important;

@@ -56,7 +56,7 @@ def collection():
         featured_resource['publish_date'] =  str(featured_resource['releaseDate'])[:10]
 
     return render_template("collection.html", featured_resources=featured_resources, filters_checked=filters_checked,
-                            distinct_topic_list=distinct_topic_list, title="Archives")
+                            distinct_topic_list=distinct_topic_list, title="Collection")
 
 
 @app.route("/about-us")
