@@ -2,11 +2,17 @@
 {% block content %}
 
 <div class="container mt-2 mb-2">
-    <h2 class="text-white text-center"><u>Featured&nbsp;Episode</u></h2>
+    <h4 class="text-white text-center"><u>Featured&nbsp;Episode</u></h4>
 </div>
 
 <!-- Show the currently featured episode -->
 <div class="container mt-3">
+  <div class="row">
+    <div class="container text-white">
+      <p>This week, we focus on podcast episodes related to [topic]. We include episodes from Quick To Listen,
+        The Disrupters and Holy Post. We hope you enjoy the podcasts, learn more about this topic and blah blah blah.</p>
+    </div>
+  </div>
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
       <!-- Display featured podcast episode information using card template -->
       {% include "includes/featured_podcast_episode_card.html" %}
@@ -16,7 +22,7 @@
 <!-- Allow for searching the collection by topic -->
 <!-- Interaction will route user to the collection page -->
 <div class="container mb-2">
-  <h2 class="text-white text-center"><u>Search the GRD Collection</u></h2>
+  <h4 class="text-white text-center"><u>Search the GRD Collection</u></h4>
 </div>
 <!-- Section to filter content -->
 <div class="container mb-4 text-white">

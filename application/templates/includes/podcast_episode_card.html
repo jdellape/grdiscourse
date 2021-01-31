@@ -1,20 +1,22 @@
 <div class="col">
     <section class="card mb-2 bg-dark text-white">
         <!--row for side by side podcast image and episode name -->
-        <div class="row align-items-start">
+        <div class="row row-cols-2 align-items-start">
             <div class="col-4">
-                <img src={{featured_resource['artworkUrl100']}}>
+                <img src="{{featured_resource['artworkUrl100']}}">
             </div><!--podcast image col -->
             <div class="col-8">
                 <a class="card-title text-white h5" href={{featured_resource['trackViewUrl']}} target="_blank">{{featured_resource['trackName']}}</a>
             </div><!--podcast episode name col -->
         </div> <!--row -->
         <div class="card-body">
-            <h7 class="card-text">Topics: {{featured_resource['topics']}}</h7><br/>
-            <h7 class="card-text">Released: {{featured_resource['publish_date']}}</h7>
+            <div class="container text-center">
+                <h7 class="card-text">Topics: {{featured_resource['topics']}}</h7></br>
+                <h7 class="card-text">Released: {{featured_resource['publish_date']}}</h7>
+            </div><!--container for card-text -->
             <div class="accordion" id="description-accordion{{featured_resource['trackId']}}">
                 <!-- Embedded card to support accordion for EPISODE description -->
-                <div class="card mt-2 border border-secondary align-items-center bg-dark">
+                <div class="card mt-2 align-items-center bg-dark">
                     <div class="card-header bg-dark" id="description-heading{{featured_resource['trackId']}}">
                         <h6>
                             <a class="text-white text-center" href="#description{{featured_resource['trackId']}}"
@@ -34,11 +36,6 @@
                     </div> <!-- collapse -->
                 </div> <!-- inner card for descriptions --> 
             </div><!-- accordion -->
-            <!-- Launch the Podcast with App -->
-            <!-- <div class="list-group mb-0">
-                <a class="list-group-item list-group-item-action text-primary" href={{featured_resource['trackViewUrl']}} target="_blank">LAUNCH IN APPLE PODCASTS</a>
-                <a class="list-group-item list-group-item-action text-primary" href="#">LAUNCH IN SPOTIFY</a>
-            </div> -->
             <!-- list group -->
         </div><!-- card body -->
     </section><!-- card -->

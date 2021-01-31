@@ -1,16 +1,25 @@
 <div class="col mx-auto">
     <section class="card mb-2 bg-dark text-white">
-        <img class="card-img-top mx-auto" src={{featured_resource['artworkUrl300']}} style="width:50%">
+        <!--row for side by side podcast image and episode name -->
+        <div class="row row-cols-2 align-items-start">
+            <div class="col-4">
+                <img src="{{featured_resource['artworkUrl100']}}">
+            </div><!--podcast image col -->
+            <div class="col-8">
+                <a class="card-title text-white h5" href={{featured_resource['trackViewUrl']}} target="_blank">{{featured_resource['trackName']}}</a>
+            </div><!--podcast episode name col -->
+        </div><!--row -->
         <div class="card-body">
-            <h3 class="card-title">{{featured_resource['trackName']}}</h3>
-            <h5 class="card-text">Topics: {{featured_resource['topics']}}</h5>
-            <h5 class="card-text">Released: {{featured_resource['publish_date']}}</h5>
+            <div class="container text-center">
+                <h7 class="card-text">Topics: {{featured_resource['topics']}}</h7></br>
+                <h7 class="card-text">Released: {{featured_resource['publish_date']}}</h7>
+            </div><!--container for card-text -->
             <div class="accordion" id="description-accordion{{featured_resource['trackId']}}">
                 <!-- Embedded card to support accordion for EPISODE description -->
-                <div class="card mt-2">
+                <div class="card mt-2 align-items-center bg-dark">
                     <div class="card-header" id="episode-description-heading{{featured_resource['trackId']}}">
                         <h6>
-                            <a href="#episode-description{{featured_resource['trackId']}}"
+                            <a class="text-white" href="#episode-description{{featured_resource['trackId']}}"
                               data-toggle="collapse"
                               aria-expanded="true"
                               aria-controls="episode-description{{featured_resource['trackId']}}"
@@ -22,45 +31,11 @@
                         data-parent="#description-accordion{{featured_resource['trackId']}}"
                         aria-labelledby="episode-description-heading{{featured_resource['trackId']}}">
                         <div class="card-body">
-                            <p class="text-dark">{{featured_resource['shortDescription']}}</p>
+                            <p class="text-white">{{featured_resource['shortDescription']}}</p>
                         </div> <!-- card body (Episode Description)-->
                     </div> <!-- collapse -->
                 </div> <!-- inner card for episode descriptions -->
-
-                 <!-- Embedded card to support accordion for PODCAST description -->
-                <div class="card">
-                    <div class="card-header" id="podcast-description-heading{{featured_resource['trackId']}}">
-                        <h6>
-                            <a href="#podcast-description{{featured_resource['trackId']}}"
-                              data-toggle="collapse"
-                              aria-expanded="true"
-                              aria-controls="description{{featured_resource['trackId']}}"
-                            >VIEW PODCAST DESCRIPTION</a>
-                        </h6>
-                    </div><!-- podcast description header -->
-                    <div id="podcast-description{{featured_resource['trackId']}}"
-                        class="collapse"
-                        data-parent="#description-accordion{{featured_resource['trackId']}}"
-                        aria-labelledby="podcast-description-heading{{featured_resource['trackId']}}">
-                        <div class="card-body">
-                            <p class="text-dark">This is hard coded currently. Need to update DB to include podcast description
-                                where necessary.
-                            </p>
-                        </div> <!-- card body (Podcast Description)-->
-                    </div> <!-- collapse -->
-                </div> <!-- inner card for podcast descriptions --> 
-
             </div><!-- accordion -->
-                            <!-- Launch the Podcast with App -->
-            <div class="list-group mb-0">
-                <a class="list-group-item list-group-item-action text-primary" href={{featured_resource['trackViewUrl']}} target="_blank">LAUNCH IN APPLE PODCASTS</a>
-                <a class="list-group-item list-group-item-action text-primary" href="#">LAUNCH IN SPOTIFY</a>
-            </div><!-- list group -->
         </div><!-- card body -->
-        <!-- play the podcast episode within browser -->
-        <!-- <audio class="img-fluid" controls preload="none" controlsList="nodownload">
-            <source src={{featured_resource['episodeUrl']}} type="audio/mpeg">
-        </audio>  -->
-        <!-- audio -->
     </section><!-- card -->
 </div><!-- column -->
