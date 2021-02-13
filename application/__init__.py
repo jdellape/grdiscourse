@@ -7,7 +7,7 @@ load_dotenv()
 app = Flask(__name__)
 
 #Establish connection to Mongo, load db object then close connection
-client = MongoClient(Config.DB_URI, connect=False)
+client = MongoClient(Config.DB_URI, connect=False, maxIdleTimeMS=600000)
 db = client.get_database('grdiscourse')
 client.close()
 
