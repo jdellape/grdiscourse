@@ -2,22 +2,35 @@
 {% block content %}
 
 <div class="container mt-2 mb-2">
-    <h4 class="text-white text-center"><u>Featured&nbsp;Episode</u></h4>
+    <h4 class="text-white text-center"><u>Welcome to Great Requirement Discourse!</u></h4>
 </div>
 
 <!-- Show the currently featured episode -->
 <div class="container mt-3">
   <div class="row">
     <div class="container text-white">
-      <p>This week, we focus on podcast episodes related to [topic]. We include episodes from Quick To Listen,
-        The Disrupters and Holy Post. We hope you enjoy the podcasts, learn more about this topic and blah blah blah.</p>
+      <p>Our mission is to promote individuals whose discourse demonstrates a commitment to the Christian faith, 
+        exemplifies the Great Requirement in social and civic life locally, nationally, and globally, and encourages 
+        growth, love, and sanctification. We strive to amplify voices that speak to difficult issues and exemplify the following qualities:
+        <div class="container text-center justify-content">
+          <ul>
+            <li>Honesty</li>
+            <li>Humility</li>
+            <li>Hope</li>
+            <li>Hunger for Truth and Justice</li>
+          </ul>
+        </div>
+      </p>
+      <p>
+        In the future, we plan to feature specific podcast episodes on our home page. For now, you can browse the collection of recommended
+        podcast episodes in our GRD Collection page and learn more about Great Requirement Discourse on our About Us page. Please note that 
+        Great Requirement Discourse claims no ownership of the content shared on our website. We are simply committed
+        to sharing existing resources produced by other Christians that we have found helpful in our personal learning and growth in faith.
+      </p>
     </div>
   </div>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-      <!-- Display featured podcast episode information using card template -->
-      {% include "includes/featured_podcast_episode_card.html" %}
-  </div><!-- row div -->
-</div><!-- Outer Container Div -->
+</div>
+
 
 <!-- Allow for searching the collection by topic -->
 <!-- Interaction will route user to the collection page -->
